@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ChatApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <div class="header__bar">
+        <%= link_to "BUBBLE", root_path, class: "title_body" %>
+        <% if flash[:notice] %>
+          <%= flash[:notice] %>
+        <% end %>
+        <% if user_signed_in? %>
+          <div class="user_nav">
+            <a>名前 : </a><%= current_user.nickname %>
+            <%= link_to "グループを作成する", new_group_path, class: "grid-6 new" %>
+            <span>
+              <ul class="user__info">
+                <%= link_to "マイページ", "/users/#{current_user.id}", class: "grid-6 mypage" %>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "grid-6" %>
+              </ul>
+            </span>
+          </div>
+        <% else %>
+          <div class="grid-6">
+            <%= link_to "ログイン", new_user_session_path, class: "grid-6" %>
+            <%= link_to "新規登録", new_user_registration_path, class: "grid-6" %>
+          </div>
+        <% end %>
+      </div>
+    </header>
+    <%= yield %>
+  </body>
+</html>

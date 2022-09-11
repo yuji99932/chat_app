@@ -1,0 +1,19 @@
+<h1>グループを作成</h1>
+<% @group.errors.full_messages.each do |message| %>
+  <%= message %>
+<% end %>
+<%= form_with(model: @group, local: true) do |form| %>
+  <div class="groups groups-new">
+    <div class="content">
+      <div class="smallArea smallArea-new">
+        <span class="group-name-form"><%= form.text_field :name, placeholder: "グループ名",  class: "new-text-box" %></span><a class="group-name">グループ</a>
+      </div>
+        <span class="largeArea"><%= form.text_field :introduction, placeholder: "グループの目的", style: "border: none", class: "group-purpose" %>
+        <div class="otherfield"><%= form.text_field :other, placeholder: "その他内容", style: "border: none", class: "group-other" %></div>
+        </span>
+        <div class="border">>
+          <%= form.submit "作成", class: "submit-btn btn" %>
+        </div
+    </div>
+  </div>
+<% end %>

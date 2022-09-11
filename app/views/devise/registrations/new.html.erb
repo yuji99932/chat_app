@@ -1,0 +1,50 @@
+<div class="contents row">
+  <div class="container">
+    <h2>新規登録</h2>
+    <%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="field">
+        <%= f.label :ニックネーム %> <em>(６文字以下)</em><br />
+        <%= f.text_field :nickname, autofocus: true, maxlength: "6", class: "nickname_field" %>
+      </div>
+      
+      <div class="field">
+        <%= f.label :好きなアーティスト %><br />
+        <%= f.text_field :artist, autofocus: true, class: "artist_field" %>
+      </div>
+      
+      <div class="field">
+        <%= f.label :"性別(男/女)" %><br />
+        <%= f.text_field :gender, autofocus: true, class: "gender_field" %>
+      </div>
+      
+      <div class="field">
+        <%= f.label :住んでいる地域 %><br />
+        <%= f.text_field :area, autofocus: true, class: "area_field" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :メールアドレス %><br />
+        <%= f.email_field :email, class: "email_field"%>
+      </div>
+
+      <div class="field">
+        <%= f.label :パスワード %>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %>文字以上)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "off", class: "password_field" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :パスワード（確認） %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "password_field" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "新規登録" %>
+      </div>
+    <% end %>
+  </div>
+</div>

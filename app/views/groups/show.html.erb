@@ -1,0 +1,42 @@
+<div class="new-group">
+  <div class="new-group-head">
+    <div class="group-name">
+      <%= @group.name+"グループ" %>
+    </div>
+    <div class="group-btn">
+      <div class="more">
+        <ul class="more-list">
+          <% if user_signed_in? && @group.owner_id == current_user.id %>
+            <li>
+              <%= link_to '編集', edit_group_path(@group), class: "edit" %>
+            </li>
+            <li>
+              <%= link_to '削除', group_path, class: "edit", method: :delete %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <% if user_signed_in? %>
+      <%= form_with(model: [@group, @message], local: true) do |form| %>
+        <%= form.text_area :text, placeholder: "コメントする", rows: "2", class: "text-box" %>
+        <%= form.submit "送信", class: "submit-btn" %>
+      <% end %>
+    <% else %>
+      <strong><p>※※※ コメントの投稿には新規登録/ログインが必要です ※※※</p></strong>
+    <% end %>
+    <div class="comments">
+      <h4>＜チャット一覧＞</h4>
+      <% if @messages %>
+        <% @messages.each do |message| %>
+          <p class="message">
+            <strong><%= link_to message.user.nickname, "/users/#{message.user_id}" %>：</strong>
+            <%= message.text %>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

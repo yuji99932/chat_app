@@ -1,0 +1,21 @@
+<div class="contents row">
+  <div class="start-time-box">
+    <div class="start-time">開始日 : <%= @start %></div>
+    <div class="artist">好きなアーティスト : <%= @artist %></div>
+    <div class="gender">性別 : <%= @gender %></div>
+    <div class="area">住んでいる地域 : <%= @area %></div>
+  </div>
+  <p><%= @nickname %>さんのグループ一覧</p>
+<% @groups.each do |group| %>
+  <div class="groups">
+    <div class="content">
+      <div class="smallArea">
+        <span><%= link_to group.name+"グループ", group_path(group) %></span>
+      </div>
+        <span class="largeArea">グループの目的 : <%= group.introduction %>
+        <div class="otherfield">その他 : <%= group.other %></div>
+        </span>
+      </div>
+    </div>
+  </div>
+<% end %>
